@@ -1,0 +1,1 @@
+function validateForm(form){	if (form.getValue('idTipoIncidente') == "" ){		throw "O campo Tipo de Incidente é de preenchimento obrigatório";	}}

@@ -1,0 +1,136 @@
+<html>
+	<head>
+        <script language="javascript" type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+        <script language="javascript" type="text/javascript" src="/kitecm-1.0.7/js/utils.js"></script>
+		<script language="javascript" type="text/javascript" src="/kitecm/js/jquery-1.5.1.js" ></script>
+      
+        <script language="javascript" type="text/javascript" src="js/custom.js"></script>
+        <link rel="stylesheet" type="text/css" href="/kitecm-1.0.7/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/custom.css"/>
+
+        <title>Solicita&ccedil;&atilde;o de Suporte</title>
+    </head>
+    <body id="KitHelpDesk">
+    	<div class="container">
+	    	<div id="logo">
+				<img src="img/fluig.png" width="83px" height="83px">
+			</div>
+			<h2 style="padding-bottom: 20px !important">i18n.translate("titulo")</h2>
+    		<form class="form-horizontal" role="form">
+	    		<input type="hidden" name="idSolicitacao" id="idSolicitacao">
+	            <input type="hidden" name="dtUltimoMovimento" id="dtUltimoMovimento">
+	            <input type="hidden" name="nrTempoEsperaAtendimento" id="nrTempoEsperaAtendimento">
+	            <input type="hidden" name="nrTempoEsperaSolucao" id="nrTempoEsperaSolucao">
+	            <input type="hidden" name="fgProcessoConcluido" id="fgProcessoConcluido">
+			  	<fieldset>
+			  		<legend>i18n.translate("legend_solic")</legend>
+				  	<div class="form-group">
+				    	<label for="idSolicitante" class="col-sm-2 control-label">i18n.translate("solicitante")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="idSolicitante" id="idSolicitante" readonly="true">
+				    	</div>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmSolicitante" id="nmSolicitante" readonly="true">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+					  	<label for="dtAbertura" class="col-sm-2 control-label">i18n.translate("dt_abertura")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="dtAbertura" id="dtAbertura" readonly="true">
+				    	</div>
+			    	</div>
+			    	<div class="form-group">
+				    	<label for="nmDepartamento" class="col-sm-2 control-label">i18n.translate("depto")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="nmDepartamento" id="nmDepartamento" readonly="true">
+				    	</div>
+				    </div>
+			    	<div class="form-group">
+				    	<label for="nrRamal" class="col-sm-2 control-label">i18n.translate("ramal")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="nrRamal" id="nrRamal" readonly="true">
+				    	</div>
+				    </div>
+			    	<div class="form-group">
+				    	<label for="btZoomTipoIncidente" class="col-sm-2 control-label">i18n.translate("tipo_incidente")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="idTipoIncidente" id="idTipoIncidente"  readonly="true">
+				    	</div>
+				    	<div class="col-sm-5">
+				      		<div class="input-group">
+					    		<input class="form-control" type="text" name="nmTipoIncidente" id="nmTipoIncidente" readonly="true">
+					  			<i class="input-group-addon glyphicon glyphicon-search" style="position: initial" name="btZoomTipoIncidente" id="btZoomTipoIncidente" onclick="abrirZoomTipoIncidente()"></i>
+					  		</div>
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="idPapelResponsavel" class="col-sm-2 control-label">i18n.translate("papel_resp")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="idPapelResponsavel" id="idPapelResponsavel" readonly="true">
+				    	</div>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmPapelResponsavel" id="nmPapelResponsavel" readonly="true">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="dsIncidente" class="col-sm-2 control-label">i18n.translate("desc_incidente")</label>
+				    	<div class="col-sm-6">
+				  			<textarea class="form-control" rows="3" name="dsIncidente" id="dsIncidente"></textarea>
+						</div>				  		
+				  	</div>
+			  	</fieldset>
+			  	
+			  	<fieldset>
+			  		<legend>i18n.translate("legend_analise")</legend>
+					<div class="form-group">
+				    	<label for="idResponsavel" class="col-sm-2 control-label">i18n.translate("resp")</label>
+				    	<div class="col-sm-4">
+				      		<input type="text" class="form-control" name="idResponsavel" id="idResponsavel" readonly="true">
+				    	</div>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmResponsavel" id="nmResponsavel" readonly="true">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="dsAnaliseCausa" class="col-sm-2 control-label">i18n.translate("desc_analise")</label>
+				    	<div class="col-sm-6">
+				  			<textarea class="form-control" rows="3" name="dsAnaliseCausa" id="dsAnaliseCausa"></textarea>
+						</div>				  		
+				  	</div>
+			  	</fieldset>
+			  	
+			  	<fieldset>
+			  		<legend>i18n.translate("legend_aval_analise")</legend>
+					<div class="form-group">
+						<label for="fgOtima" class="col-sm-2 control-label">i18n.translate("avaliacao_atend")</label>
+						<div class="col-sm-1">
+					    	<label class="radio-inline">
+							  <input type="radio" name="fgAvaliacaoAtendimento" id="fgOtima" value="&Oacute;tima">
+							  i18n.translate("rdb_otima")
+							</label>
+						</div>
+						<div class="col-sm-1">
+							<label class="radio-inline">
+							  <input type="radio" name="fgAvaliacaoAtendimento" id="fgRegular" value="Regular">
+							  i18n.translate("rdb_regular")
+							</label>
+						</div>
+						<div class="col-sm-1">
+							<label class="radio-inline">
+							<input type="radio" name="fgAvaliacaoAtendimento" id="fgRuim" value="Ruim">
+								i18n.translate("rdb_ruim")						  
+							</label>
+						</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="dsJustificativa" class="col-sm-2 control-label">i18n.translate("just")</label>
+				    	<div class="col-sm-6">
+				  			<textarea class="form-control" rows="3" name="dsJustificativa" id="dsJustificativa"></textarea>
+						</div>				  		
+				  	</div>
+			  	</fieldset>
+			</form> 
+        </div>
+    </body>
+</html>

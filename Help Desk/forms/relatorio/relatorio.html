@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1">
+		<title>Relat&oacute;rio</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+
+		<script src="/webdesk/vcXMLRPC.js"></script> 
+
+		<link rel="stylesheet" type="text/css" href="http://datatables.net/media/css/site.css?_=a6f3a0b3f9958f3f2532101863852598">
+		<link rel="stylesheet" type="text/css" href="http://datatables.net/release-datatables/extensions/TableTools/css/dataTables.tableTools.css">
+
+		<script type="text/javascript" src="http://datatables.net/media/js/site.js?_=573d349ed7cdfc75316f319b4565f3f7"></script>
+		<script type="text/javascript" src="http://datatables.net/media/js/dynamic.php" async></script>
+		<script type="text/javascript" language="javascript" src="http://datatables.net/release-datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+		<script type="text/javascript" language="javascript" src="http://datatables.net/release-datatables/extensions/ColReorder/js/dataTables.colReorder.js"></script>
+		
+
+	</head>
+	<body class="wide">
+		<form>
+		<div id="dados"></div>
+		<script type="text/javascript">
+			var Rel_linhas = [];
+			var Rel_colunas = [];
+			var vAOColumns = [];
+			
+			var definirColunas = {
+				idSolicitacao	: "Solicita&ccedil;&atilde;o",
+				nmSolicitante : "Solicitante",
+				dtAbertura : "Abertura",
+				Fake_dataAbertura : "",
+				nmResponsavel	: "Respons&aacute;vel",
+				nrTempoEsperaSolucao : "Tempo para Solu&ccedil;&atilde;o",
+				fgAvaliacaoAtendimento: "Avalia&ccedil;&atilde;o",
+				nmTipoIncidente: "Incidente"
+			};
+
+			$(document).ready(function() {
+			
+				var cst = DatasetFactory.createConstraint("metadata#active", true, true, ConstraintType.MUST);
+    			var constraints = new Array(cst);
+			
+				var dtsRelatorio = DatasetFactory.getDataset("ds_solicitacao_suporte", null, constraints, null);
+				var Exibir_coluna = 0;
+				
+				for(var col = 0; col < dtsRelatorio.columns.length; col++ ) {
+					if (definirColunas.hasOwnProperty( dtsRelatorio.columns[col] )) {
+						Rel_colunas.push({ "title": dtsRelatorio.columns[col] });
+						Exibir_coluna++;
+					}
+				}
+				
+				for (var linha = 0; linha < dtsRelatorio.values.length; linha++ ){
+					var linhaDinamica = [];
+					for (var i = 0; i < Rel_colunas.length; i++) {
+						var nomeDaColuna = Rel_colunas[i].title;
+						linhaDinamica.push( dtsRelatorio.values[linha][nomeDaColuna] );
+						
+						if (nomeDaColuna == 'dtAbertura') {
+							linhaDinamica.push( dtsRelatorio.values[linha][nomeDaColuna].split(" ")[0].split("/").reverse().join("") );
+						}
+					}
+					Rel_linhas.push(linhaDinamica);
+				}
+				
+				// substituindo os nomes das colunas
+				
+				for (var i = 0; i < Rel_colunas.length; i++) {
+					var nome = Rel_colunas[i].title;
+					Rel_colunas[i].title = definirColunas[ Rel_colunas[i].title ];
+					
+					if (nome == 'dtAbertura') {						
+						Rel_colunas.push({title: definirColunas.Fake_dataAbertura});
+						
+						vAOColumns.push({ 
+							"sTitle": Rel_colunas[i].title,
+							"iDataSort": 1
+						});
+						
+						vAOColumns.push({ 
+							"sTitle": definirColunas.Fake_dataAbertura,
+							"bVisible": false
+						});						
+					}
+					else {
+						vAOColumns.push({ 
+							'sTitle': Rel_colunas[i].title
+						});
+					}
+				}
+				//Rel_colunas.pop();
+				vAOColumns.pop();
+				console.log(vAOColumns);
+				
+				$('#dados').html( '<table cellpadding="0" cellspacing="0" border="0" class="display" style="font-size: 14px;" id="dados_relatorio"></table>' );
+ 
+			    $('#dados_relatorio').dataTable( {
+			        "data": Rel_linhas,
+			        "columns": Rel_colunas,
+					"aoColumns": vAOColumns,
+			        'sDom': 'T<"clear">Rlfrtip',
+					
+			        'tableTools': {
+			            'sSwfPath': "http://datatables.net/release-datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+						"aButtons": [
+							{
+								"sExtends":     "copy",
+								"sButtonText": "Copiar"
+							},
+							
+							{
+								"sExtends":     "csv",
+								"sButtonText": "Exportar CSV"
+							},
+							
+							{
+								"sExtends":     "xls",
+								"sButtonText": "Exportar XLS"
+							},
+							
+							{
+								"sExtends":     "pdf",
+								"sButtonText": "Exportar PDF",
+								"sPdfOrientation": "landscape",
+								"mColumns": "visible"
+							},
+							
+							{
+								"sExtends":     "print",
+								"sButtonText": "Imprimir"
+							}
+						]
+			        },
+			        "aLengthMenu": [[100, 50, 30, 10, -1], [100, 50, 30, 10, "All"]],
+			        "language": {
+						"sEmptyTable": "Nenhum registro encontrado",
+						"sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+						"sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+						"sInfoFiltered": "(Filtrados de _MAX_ registros)",
+						"sInfoPostFix": "",
+						"sInfoThousands": ".",
+						"sLengthMenu": "_MENU_ resultados por página",
+						"sLoadingRecords": "Carregando...",
+						"sProcessing": "Processando...",
+						"sZeroRecords": "Nenhum registro encontrado",
+						"sSearch": "Pesquisar",
+						"oPaginate": {
+							"sNext": "Próximo",
+							"sPrevious": "Anterior",
+							"sFirst": "Primeiro",
+							"sLast": "Último"
+						},
+						"oAria": {
+							"sSortAscending": ": Ordenar colunas de forma ascendente",
+							"sSortDescending": ": Ordenar colunas de forma descendente"
+						}
+					}
+			    });
+			});
+
+		</script>
+		<input id="campo" name="campo" type="hidden" >
+		</form>
+	</body>
+</html>

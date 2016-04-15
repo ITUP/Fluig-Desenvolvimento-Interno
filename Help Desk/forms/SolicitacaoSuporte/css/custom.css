@@ -1,0 +1,36 @@
+div#logo {
+	display: inline-block; 
+	float: right; 
+}
+
+.control-label {
+    font-size: 1.1em;
+}
+#KitHelpDesk #logo {
+    float: right;
+    width: 10%;
+    text-align: right;
+}
+#KitHelpDesk h2 {
+    border: none;
+    background-color: white;
+    font-size: 22px;
+    float: left;
+    clear: none;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 90%;
+}
+#kitHelpDesk h2 + form {
+    clear: both;
+    padding-top: 10px;
+}
+
+legend{
+	font-weight: normal !important;
+	font-size: 17px !important;
+}
+
+fieldset{
+	padding-bottom: 20px !important;
+}

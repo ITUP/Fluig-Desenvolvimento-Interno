@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <script language="javascript" type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+        <script language="javascript" type="text/javascript" src="/kitecm-1.0.7/js/utils.js"></script>
+        <script language="javascript" type="text/javascript" src="/kitecm/js/jquery-1.5.1.js" ></script>
+        
+        <script language="javascript" type="text/javascript" src="js/custom.js"></script>
+        <link rel="stylesheet" type="text/css" href="/kitecm-1.0.7/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/custom.css"/>
+        <title>Tipo de Incidente</title>
+    </head>
+    <body id="KitHelpDesk">
+    	<div class="container">
+	    	<div id="logo">
+				<img src="img/fluig.png" width="83px" height="83px">
+			</div>
+			<h2 style="padding-bottom: 20px !important">Cadastro de Incidentes</h2>
+			<form class="form-horizontal" role="form">
+			  	<div class="form-group">
+			    	<label for="cdIncidente" class="col-sm-2 control-label">i18n.translate("codigo")</label>
+			    	<div class="col-sm-5">
+			      		<input type="text" class="form-control" name="cdIncidente" id="cdIncidente" >
+			    	</div>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="nmIncidente" class="col-sm-2 control-label">i18n.translate("descricao")</label>
+			    	<div class="col-sm-5">
+			      		<input type="text" class="form-control" name="nmIncidente" id="nmIncidente" >
+			    	</div>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="nrPrazo" class="col-sm-2 control-label">i18n.translate("prazo")</label>
+			    	<div class="col-sm-5">
+			      		<input type="text" class="form-control" name="nrPrazo" id="nrPrazo" >
+			    	</div>
+			  	</div>
+			  	<div class="form-group">
+			    	<label for="btZoomPapelResponsavel" class="col-sm-2 control-label">i18n.translate("papel")</label>
+			    	<div class="col-sm-3">
+			      		<input type="text" class="form-control" name="idPapelResponsavel" id="idPapelResponsavel"  readonly="true">
+			    	</div>
+			    	<div class="col-sm-4">
+			      		<div class="input-group">
+				    		<input class="form-control" type="text" name="nmPapelResponsavel" id="nmPapelResponsavel" readonly="true">
+				  			<i class="input-group-addon glyphicon glyphicon-search" style="position: initial" name="btZoomPapelResponsavel" id="btZoomPapelResponsavel" onclick="abrirZoomPapel()"></i>
+				  		</div>
+			    	</div>
+			  	</div>
+			</form>
+		</div>
+    </body>
+</html>
