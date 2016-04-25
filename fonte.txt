@@ -1,6 +1,10 @@
 aaaaaaa
 <<<<<<< HEAD
+<<<<<<< HEAD
 bbbbbbh
 =======
 bbbbbbxyz
+>>>>>>> refs/remotes/origin/master
+=======
+bbbbbbxyzjsk
 >>>>>>> refs/remotes/origin/master
